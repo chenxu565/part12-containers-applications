@@ -1,0 +1,10 @@
+% docker run -it ubuntu bash
+
+# apt-get update
+# touch /usr/src/app/index.js
+# echo "console.log('Hello World')" > /usr/src/app/index.js
+
+# apt-get -y install curl
+# curl -fsSL https://deb.nodesource.com/setup_20.x | bash
+# apt-get -y install nodejs
+# node usr/src/app/index.js
