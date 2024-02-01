@@ -1,0 +1,48 @@
+// Exercise 12.11
+
+// at the directory of /todo-app/todo-backend, start the container
+
+docker compose -f docker-compose.dev.yml up
+
+// with a new terminal, enter the redis container
+
+% docker ps
+CONTAINER ID   IMAGE     COMMAND                  CREATED          STATUS              PORTS                     NAMES
+3216ccef1afb   redis     "docker-entrypoint.s…"   54 minutes ago   Up About a minute   0.0.0.0:6379->6379/tcp    todo-backend-redis-1
+26f6ae5a2497   mongo     "docker-entrypoint.s…"   54 minutes ago   Up About a minute   0.0.0.0:3456->27017/tcp   todo-backend-mongo-1
+
+% docker exec -it 3216ccef1afb /bin/bash
+root@3216ccef1afb:/data#
+
+// enter the redis-cli
+root@3216ccef1afb:/data# redis-cli
+127.0.0.1:6379> 
+
+// check the keys
+127.0.0.1:6379> KEYS *
+1) "added_todos_count"
+// check the value of the key
+127.0.0.1:6379> GET added_todos_count
+"2"
+// set the value of the key
+127.0.0.1:6379> SET added_todos_count 9001
+OK
+
+// open the browser and go to http://localhost:3000/statistics and see the value of the key changed
+
+// Create a new todo in a new terminal
+% curl -X POST http://localhost:3000/todos -H "Content-Type: application/json" -d '{"text": "Another new todo again"}'
+
+{"_id":"65bc16b4442a2be7f8cb59be","text":"Another new todo again","done":false,"__v":0}
+
+// return to the redis-cli and check the value of the key
+127.0.0.1:6379> GET added_todos_count
+"9002"
+
+// Delete the key from the redis-cli
+127.0.0.1:6379> DEL added_todos_count
+(integer) 1
+
+// open the browser and go to http://localhost:3000/statistics and see the value of the key changed
+
+// Create a new todo in a new terminal again, and see everything is still working
