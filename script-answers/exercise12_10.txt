@@ -1,0 +1,18 @@
+// note to myself on how to run exercise 12.10
+
+// at the directory of todo-app/todo-backend/, start the container
+
+% docker compose -f docker-compose.dev.yml up
+
+// at the same directory, with a new terminal, start the express server
+
+REDIS_URL=redis://localhost:6379 MONGO_URL=mongodb://the_username:the_password@localhost:3456/the_database npm run dev
+
+// check statistics at http://localhost:3000/statistics
+// check todos at http://localhost:3000/todos
+
+// with a new terminal, post a new todo
+% curl -X POST http://localhost:3000/todos -H "Content-Type: application/json" -d '{"text": "New todo"}'
+
+// check statistics at http://localhost:3000/statistics
+// check todos at http://localhost:3000/todos
