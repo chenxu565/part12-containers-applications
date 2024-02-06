@@ -1,0 +1,15 @@
+// note to myself on running exercise 12.15
+
+// at the directory of todo-app/todo-backend/, start the container for database
+
+% docker compose -f docker-compose.dev.yml up
+
+// with a new terminal, at the directory of todo-app/todo-backend/, start the backend server, here port 3001 is used, because 3000 is used by the frontend
+
+REDIS_URL=redis://localhost:6379 MONGO_URL=mongodb://the_username:the_password@localhost:3456/the_database PORT=3001 npm run dev
+
+// with a new terminal, at the directory of todo-app/todo-frontend/, start the container for frontend
+
+docker compose -f docker-compose.dev.yml up --build
+
+// now one can access the frontend at http://localhost:3000/, and develop the frontend while it is running inside the container
