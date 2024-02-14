@@ -2,7 +2,7 @@
 
 ## Go to todo-app/todo-backend
 ```
-cd todo-app/todo-backend
+cd ./todo-app/todo-backend
 ```
 
 ## Start the docker container
@@ -14,7 +14,7 @@ docker compose -f docker-compose.dev.yml up
 
 ## To edit backend while the backend is running in the container
 
-### Edit the file in todo-app/todo-backend/routes/index.js
+### E.g. edit the file in todo-app/todo-backend/routes/index.js
 
 ```
 /* GET added todos count stats. */
@@ -38,3 +38,18 @@ Or to remove volumes altogether
 ```
 docker compose -f docker-compose.dev.yml down --volumes
 ```
+
+# While the backend is running in a container, one can even start the frontend dev in its own container at the same time
+
+## CD to frontend
+```
+cd ./todo-app/todo-frontend
+```
+## Start the frontend in dev mode in a container
+```
+docker compose -f docker-compose.dev.yml up
+```
+
+## The frontend can be reached at http://localhost:3000, and it talks to the backend at http://localhost:3001
+
+## One can edit the source code of frontend and see instant change at http://localhost:3000
