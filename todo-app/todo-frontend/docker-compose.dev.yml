@@ -5,7 +5,8 @@ services:
       context: .
       dockerfile: dev.Dockerfile
     volumes:
-      - ./:/usr/src/app
+      - ./src:/usr/src/app/src
+      - ./public:/usr/src/app/public
     ports:
       - 3000:3000
     container_name: todo-front-dev
