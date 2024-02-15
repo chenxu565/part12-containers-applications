@@ -1,0 +1,18 @@
+services:
+  nginx:
+    image: nginx:1.20.1
+    volumes:
+      - ./nginx.dev.conf:/etc/nginx/nginx.conf:ro
+    ports:
+      - 8080:80
+    container_name: reserse-proxy
+    depends_on:
+      - app
+  app:
+    image: todo-front-dev
+    volumes:
+      - ./todo-frontend/src:/usr/src/app/src
+      - ./todo-frontend/public:/usr/src/app/public
+    container_name: todo-front-dev-nginx
+    environment:
+      - REACT_APP_BACKEND_URL=http://localhost:3001
