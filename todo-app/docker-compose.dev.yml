@@ -11,11 +11,11 @@ services:
       - server
 
   app:
-    image: todo-front-dev
+    image: todo-frontend-dev
     volumes:
       - ./todo-frontend/src:/usr/src/app/src
       - ./todo-frontend/public:/usr/src/app/public
-    container_name: todo-front-dev-nginx
+    container_name: todo-frontend-dev-nginx
     environment:
       - REACT_APP_BACKEND_URL=http://localhost:8080/api
 
