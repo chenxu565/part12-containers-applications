@@ -1,0 +1,17 @@
+node_modules
+build
+
+.env
+
+Dockerfile
+dev.Dockerfile
+.dockerignore
+
+.gitignore
+.git
+.github
+
+.eslintrc.js
+.eslintignore
+
+README.md

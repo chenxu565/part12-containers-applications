@@ -1,0 +1,30 @@
+services:
+  nginx:
+    image: nginx:1.20.1
+    container_name: phonebook-nginx-dev
+    volumes:
+      - ./nginx.dev.conf:/etc/nginx/nginx.conf:ro
+      - ./proxy_common.conf:/etc/nginx/proxy_common.conf:ro
+    ports:
+      - "8080:80"
+    depends_on:
+      - app
+      - server
+
+  app:
+    image: phonebook-frontend-dev
+    volumes:
+      - ./frontend/src:/usr/src/app/src
+      - ./frontend/public:/usr/src/app/public
+    container_name: phonebook-frontend-dev
+    environment:
+      - REACT_APP_API_URL=http://localhost:8080/api
+
+  server:
+    image: phonebook-backend-dev
+    volumes:
+      - ./backend:/usr/src/app
+      - /usr/src/app/node_modules
+    container_name: phonebook-backend-dev
+    env_file:
+      - ./backend/.env
